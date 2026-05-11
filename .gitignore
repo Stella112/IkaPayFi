@@ -1,0 +1,19 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Local database (contains private key — never commit)
+data/ikapayfi-db.json
+
+# Environment secrets
+.env
+
+# Rust / Anchor build artifacts
+target/
+.anchor/
+**/*.so
+**/*.d
+
+# OS
+.DS_Store
+Thumbs.db

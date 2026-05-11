@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IkaPayFi | Private Bridgeless Payroll</title>
+  <meta name="description" content="Private bridgeless payroll and remittance on Solana using Encrypt FHE and Ika dWallets." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/web/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="brand-text">
+          <strong>IkaPayFi</strong>
+          <span>Private Capital Markets</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active">
+          <span class="nav-icon">📊</span>
+          Dashboard
+        </button>
+        <button class="nav-item">
+          <span class="nav-icon">🛡️</span>
+          Policy Vault
+        </button>
+        <button class="nav-item">
+          <span class="nav-icon">💸</span>
+          Payrolls
+        </button>
+        <button class="nav-item">
+          <span class="nav-icon">⚡</span>
+          Integrations
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-card">
+          <div class="status-header">
+            <span class="status-indicator online"></span>
+            <strong>IkaFire Engine</strong>
+          </div>
+          <p id="integrationMode">Loading...</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+      <!-- Top bar -->
+      <header class="topbar">
+        <div class="welcome">
+          <span class="eyebrow">IkaFire Policy Engine</span>
+          <h1>Vault Dashboard</h1>
+        </div>
+        <div class="actions">
+          <button id="walletButton" class="btn btn-secondary">Create Devnet Wallet</button>
+          <button id="passkeyButton" class="btn btn-primary">🔑 Passkey</button>
+        </div>
+      </header>
+
+      <!-- Hero section: vault info + policy form -->
+      <section class="hero-section">
+
+        <!-- Left: vault balance + flow + metrics -->
+        <div class="glass-panel main-vault">
+          <div class="panel-header">
+            <div class="balance-display">
+              <span class="label">Total Private Balance</span>
+              <div id="privateInflow" class="amount">$0.00</div>
+            </div>
+            <div id="approvalBadge" class="badge">Ready</div>
+          </div>
+
+          <div class="flow-visualization">
+            <div class="node-group">
+              <div class="node eth">ETH</div>
+              <span class="node-label">Inflow</span>
+            </div>
+            <div class="connector"><div class="flow-line"></div></div>
+            <div class="node-group center">
+              <div class="vault-orb">
+                <div class="orb-inner"></div>
+                <span class="orb-icon">🔒</span>
+              </div>
+              <span class="node-label">Ika dWallet</span>
+            </div>
+            <div class="connector"><div class="flow-line"></div></div>
+            <div class="node-group">
+              <div class="node sol">SOL</div>
+              <span class="node-label">Policy</span>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <span class="label">Source Chain</span>
+              <strong id="sourceChain">—</strong>
+            </div>
+            <div class="metric-card">
+              <span class="label">Asset Kind</span>
+              <strong id="asset">—</strong>
+            </div>
+            <div class="metric-card">
+              <span class="label">Policy Result</span>
+              <strong id="policyState">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: policy config form -->
+        <div class="glass-panel policy-config">
+          <div class="panel-header compact">
+            <h2>Allocation Policy</h2>
+            <button id="resetButton" class="btn-text">Reset Vault</button>
+          </div>
+
+          <form id="policyForm" class="policy-form">
+            <div class="input-group">
+              <label for="assetSelect">Simulate Inflow Asset</label>
+              <select id="assetSelect"></select>
+            </div>
+
+            <div class="input-group">
+              <label for="amountInput">Amount (USD)</label>
+              <input type="number" id="amountInput" step="0.01" value="3250" />
+              <input type="hidden" id="senderInput" value="Remote Studio DAO" />
+            </div>
+
+            <div class="sliders">
+              <div class="slider-field">
+                <label>Savings <span id="savingsLabel" class="value-tag">25%</span></label>
+                <input type="range" id="savingsInput" min="0" max="60" value="25" />
+              </div>
+              <div class="slider-field">
+                <label>Family <span id="familyLabel" class="value-tag">20%</span></label>
+                <input type="range" id="familyInput" min="0" max="60" value="20" />
+              </div>
+              <div class="slider-field">
+                <label>Bills <span id="billsLabel" class="value-tag">30%</span></label>
+                <input type="range" id="billsInput" min="0" max="60" value="30" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="limitInput">Encrypted Spend Limit (USD)</label>
+              <input type="number" id="limitInput" value="900" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              Commit Policy &amp; Record Inflow
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Details: allocations + history -->
+      <section class="details-section">
+        <div class="glass-panel allocations-panel">
+          <h3>Encrypted Bucket Allocations</h3>
+          <div id="allocations" class="allocation-list">
+            <div class="empty-state">Submit an inflow to see allocation outputs.</div>
+          </div>
+        </div>
+
+        <div class="glass-panel history-panel">
+          <h3>Inflow History</h3>
+          <div id="historyList" class="history-list">
+            <div class="empty-state">No inflows recorded yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trace + audit -->
+      <section class="trace-section">
+        <div class="glass-panel trace-panel">
+          <h3>On-Chain Execution Trace</h3>
+          <div id="traceList" class="trace-list"></div>
+
+          <h3 style="margin-top: 28px;">Devnet Status</h3>
+          <div id="devnetList" class="trace-list"></div>
+
+          <div class="devnet-actions">
+            <button id="airdropButton" class="btn btn-secondary btn-sm">Airdrop SOL</button>
+            <button id="statusButton" class="btn btn-secondary btn-sm">Check Devnet</button>
+          </div>
+        </div>
+
+        <div class="glass-panel audit-panel">
+          <h3>System Audit Log</h3>
+          <div id="auditList" class="audit-list"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="/web/app.js"></script>
+</body>
+</html>
