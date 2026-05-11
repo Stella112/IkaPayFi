@@ -9,7 +9,22 @@ mod encrypted_policy;
 declare_id!("IkaPayFi111111111111111111111111111111111");
 
 pub const VAULT_SEED: &[u8] = b"ikapayfi-vault";
-pub const IKA_CPI_AUTHORITY_SEED: &[u8] = b"ika-cpi-authority";
+
+// CPI authority seed per Ika pre-alpha docs:
+// Seeds: [b"__ika_cpi_authority"], program = YOUR_PROGRAM_ID
+// Source: https://solana-pre-alpha.ika.xyz (on-chain integration guide)
+pub const IKA_CPI_AUTHORITY_SEED: &[u8] = b"__ika_cpi_authority";
+
+// Ika pre-alpha devnet program ID
+// Source: https://solana-pre-alpha.ika.xyz (pre-alpha environment section)
+pub const IKA_PROGRAM_ID: &str = "87W54kGYFQ1rgWqMeu4XTPHWXWmXSQCcjm8vCTfiq1oY";
+
+// Ika DWalletSignatureScheme values (u16 LE)
+// 0=EcdsaKeccak256, 1=EcdsaSha256, 2=EcdsaDoubleSha256, 3=TaprootSha256,
+// 4=EcdsaBlake2b256, 5=EddsaSha512, 6=SchnorrkelMerlin
+// Source: https://solana-pre-alpha.ika.xyz (supported curves and signature schemes)
+pub const SIGNATURE_SCHEME_ECDSA_KECCAK256: u16 = 0; // Ethereum (Secp256k1 + Keccak256)
+pub const SIGNATURE_SCHEME_EDDSA_SHA512: u16 = 5; // Solana (Ed25519)
 
 #[program]
 pub mod ikapayfi_policy_engine {
@@ -133,18 +148,42 @@ pub mod ikapayfi_policy_engine {
     }
 
     /// Approves a message for the Ika dWallet to sign on an external chain.
-    /// This happens only after the Solana policy engine verifies the encrypted conditions.
+    /// This happens only after the Solana policy engine verifies the encrypted policy conditions.
+    ///
+    /// Integration boundary — Ika dWallet CPI:
+    /// Per https://solana-pre-alpha.ika.xyz, the real CPI call is:
+    ///
+    ///   let ctx = DWalletContext {
+    ///       dwallet_program,          // Ika program: 87W54kGYFQ1rgWqMeu4XTPHWXWmXSQCcjm8vCTfiq1oY
+    ///       cpi_authority,            // PDA: seeds=[b"__ika_cpi_authority"], program=THIS_PROGRAM_ID
+    ///       caller_program,           // this program's account info
+    ///       cpi_authority_bump,
+    ///   };
+    ///   ctx.approve_message(
+    ///       message_approval,         // writable PDA to create (MessageApproval account)
+    ///       dwallet,                  // the dWallet account (authority = cpi_authority)
+    ///       payer,                    // rent payer
+    ///       system_program,
+    ///       message_hash,             // 32-byte keccak256 hash of the message to sign
+    ///       user_pubkey,              // connected wallet public key (32 bytes)
+    ///       signature_scheme,         // e.g. 0 = EcdsaKeccak256, 5 = EddsaSha512
+    ///       bump,                     // MessageApproval PDA bump
+    ///   )?;
+    ///
+    /// On success, Ika network detects the MessageApproval PDA and produces a signature.
+    /// The MessageApproval account transitions: Pending(0) → Signed(1).
     pub fn approve_ika_message(ctx: Context<ApproveIkaMessage>, message_hash: [u8; 32]) -> Result<()> {
-        // Verification & Approval Flow:
-        // 1. In a production environment, we verify that `can_sign_out_ct` decrypted to true.
-        // 2. We use the program's PDA (ika_cpi_authority) to CPI into Ika's signing-request instruction.
-        // 3. Ika network only produces the signature if this Solana-side approval is present.
-        
         let split = &mut ctx.accounts.split;
         require!(split.ika_approval_status != IkaApprovalStatus::Approved, IkaPayFiError::AlreadyApproved);
-        
+
         split.ika_approval_status = IkaApprovalStatus::Approved;
         split.approved_message_hash = message_hash;
+
+        // NOTE: Real Ika CPI requires ika-dwallet-anchor (anchor-lang v1) which currently
+        // conflicts with encrypt-anchor (anchor-lang v0.32). This stub records the approval
+        // on-chain; the DWalletContext.approve_message() CPI will be wired once the
+        // version conflict is resolved with sponsor-provided SDK guidance.
+        // See Cargo.toml and docs/DEVNET_RUNBOOK.md for migration plan.
 
         emit!(IkaMessageApproved {
             vault: ctx.accounts.vault.key(),

@@ -1,90 +1,185 @@
-# Devnet Runbook
+# IkaPayFi Devnet Runbook
 
-## What Works Now
+Sourced from:
+- Encrypt pre-alpha docs: https://docs.encrypt.xyz
+- Ika pre-alpha docs: https://solana-pre-alpha.ika.xyz
 
-The local app can:
+---
 
-- create a Solana devnet wallet
-- persist the wallet server-side in `data/ikapayfi-db.json`
-- derive Encrypt pre-alpha PDAs from the official example repo seeds
-- check whether the Encrypt config account exists on devnet
-- request devnet SOL from the Solana faucet when the faucet is available
-- record inflows, policy results, approvals, balances, and audit events
+## Pre-Alpha Network Endpoints
 
-The current devnet wallet endpoint does not expose the secret key to the browser.
+| Service | Endpoint |
+|---|---|
+| Solana RPC | `https://api.devnet.solana.com` |
+| Encrypt gRPC executor | `https://pre-alpha-dev-1.encrypt.ika-network.net:443` |
+| Ika gRPC network | `https://pre-alpha-dev-1.ika.ika-network.net:443` |
 
-## Commands
+## On-Chain Program IDs (Devnet)
+
+| Program | ID |
+|---|---|
+| Encrypt FHE | `4ebfzWdKnrnGseuQpezXdG8yCdHqwQ1SSBHD3bWArND8` |
+| Ika dWallet | `87W54kGYFQ1rgWqMeu4XTPHWXWmXSQCcjm8vCTfiq1oY` |
+| IkaPayFi Policy Engine | `IkaPayFi111111111111111111111111111111111` (update after `anchor deploy`) |
+
+---
+
+## Pre-Alpha Disclaimer (from both official docs)
+
+> **Encrypt**: There is no real encryption — all data is completely public and stored as plaintext on-chain. All interfaces, APIs, and data formats are subject to change without notice.
+
+> **Ika**: Signing uses a single mock signer, not real distributed MPC. All 11 protocol operations are implemented (DKG, Sign, Presign, FutureSign, etc.) but without real MPC security guarantees.
+
+---
+
+## Dependency Reference
+
+### Encrypt (anchor-lang = 0.32)
+```toml
+[dependencies]
+encrypt-types  = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
+encrypt-dsl    = { package = "encrypt-solana-dsl", git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
+encrypt-anchor = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
+
+[dev-dependencies]
+encrypt-solana-test = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
+```
+
+TypeScript client:
+```bash
+bun add @encrypt.xyz/pre-alpha-solana-client
+```
+
+### Ika dWallet (anchor-lang = 1 required)
+```toml
+[dependencies]
+# Anchor v1 integration:
+ika-dwallet-anchor = { git = "https://github.com/dwallet-labs/ika-pre-alpha" }
+anchor-lang = "1"
+
+# SDK types only (compatible with anchor-lang 0.32):
+ika-sdk-types = { package = "ika-solana-sdk-types", git = "https://github.com/dwallet-labs/ika-pre-alpha" }
+
+# Off-chain gRPC client:
+ika-grpc        = { git = "https://github.com/dwallet-labs/ika-pre-alpha" }
+ika-dwallet-types = { git = "https://github.com/dwallet-labs/ika-pre-alpha" }
+```
+
+> **Known conflict**: `encrypt-anchor` requires `anchor-lang = "0.32"` and `ika-dwallet-anchor` requires `anchor-lang = "1"`. Both SDKs are from dWallet Labs. The recommended resolution is to await sponsor guidance on a unified anchor version, or implement the Ika CPI manually using `ika-sdk-types` without `ika-dwallet-anchor`.
+
+---
+
+## Ika CPI Authority Pattern
+
+Per official docs, every program controlling a dWallet must derive its CPI authority PDA:
+
+```rust
+// Seeds: [b"__ika_cpi_authority"], program = YOUR_PROGRAM_ID
+let (cpi_authority, bump) = Pubkey::find_program_address(
+    &[b"__ika_cpi_authority"],
+    &your_program_id,
+);
+// Transfer dWallet authority to this PDA:
+ctx.transfer_dwallet(dwallet, cpi_authority.as_array())?;
+```
+
+## Ika approve_message CPI (full signature)
+
+```rust
+let ctx = DWalletContext {
+    dwallet_program,     // Ika program ID: 87W54kGYFQ1rgWqMeu4XTPHWXWmXSQCcjm8vCTfiq1oY
+    cpi_authority,       // PDA derived above
+    caller_program,      // this program's account info
+    cpi_authority_bump,
+};
+
+ctx.approve_message(
+    message_approval,    // writable MessageApproval PDA (to create)
+    dwallet,             // the dWallet account
+    payer,
+    system_program,
+    message_hash,        // [u8; 32] — keccak256 of the transaction to sign
+    user_pubkey,         // [u8; 32] — connected Solana wallet pubkey
+    signature_scheme,    // u16: 0=EcdsaKeccak256, 5=EddsaSha512 (see below)
+    bump,                // MessageApproval PDA bump
+)?;
+```
+
+### Signature Schemes (DWalletSignatureScheme u16)
+| Value | Scheme | Use case |
+|---|---|---|
+| 0 | EcdsaKeccak256 | Ethereum transactions |
+| 1 | EcdsaSha256 | Bitcoin (legacy) |
+| 2 | EcdsaDoubleSha256 | Bitcoin (double SHA) |
+| 3 | TaprootSha256 | Bitcoin Taproot |
+| 4 | EcdsaBlake2b256 | — |
+| 5 | EddsaSha512 | Solana (Ed25519) |
+| 6 | SchnorrkelMerlin | Polkadot/Substrate |
+
+---
+
+## Encrypt FHE Graph Execution Pattern
+
+```rust
+use encrypt_anchor::EncryptContext;
+
+let ctx = EncryptContext {
+    encrypt_program: ...,
+    config: ...,
+    deposit: ...,
+    cpi_authority: ...,
+    caller_program: ...,
+    network_encryption_key: ...,
+    payer: ...,
+    event_authority: ...,
+    system_program: ...,
+    cpi_authority_bump,
+};
+
+// Call FHE graph (generated by #[encrypt_fn] macro)
+ctx.payfi_split_graph(
+    amount_ct, savings_bps_ct, family_bps_ct, bills_bps_ct,
+    spend_limit_ct, savings_out, family_out, bills_out,
+    spendable_out, can_sign_out,
+)?;
+// The executor picks up the GraphExecuted event and evaluates the graph off-chain.
+// Output ciphertexts transition from Pending(0) → Verified(1).
+```
+
+---
+
+## Step-by-Step Devnet Flow
+
+1. `solana config set --url devnet`
+2. `solana-keygen new --outfile ~/.config/solana/id.json` (or use connected wallet)
+3. `solana airdrop 2` (or use https://faucet.solana.com)
+4. `anchor build` (requires Linux/macOS with MSVC-compatible linker)
+5. `anchor deploy` → record deployed program ID
+6. Update `declare_id!` in `lib.rs` and `Anchor.toml` with the real program ID
+7. Submit encrypted inputs via `bun add @encrypt.xyz/pre-alpha-solana-client`
+8. Submit dWallet DKG request via `ika-grpc` client
+9. Transfer dWallet authority to policy engine CPI authority PDA
+10. Trigger `execute_private_split` → Encrypt executor processes graph
+11. Trigger `approve_ika_message` → Ika network produces signature
+
+---
+
+## Environment Variables (.env)
 
 ```bash
-npm install
-npm test
-npm start
-```
+IKAPAYFI_INTEGRATION_MODE=devnet
 
-Open:
+# Solana
+SOLANA_RPC_URL=https://api.devnet.solana.com
 
-```text
-http://localhost:5173
-```
+# Encrypt (from docs.encrypt.xyz)
+ENCRYPT_GRPC_URL=https://pre-alpha-dev-1.encrypt.ika-network.net:443
+ENCRYPT_PROGRAM_ID=4ebfzWdKnrnGseuQpezXdG8yCdHqwQ1SSBHD3bWArND8
 
-Useful API calls:
+# Ika (from solana-pre-alpha.ika.xyz)
+IKA_GRPC_URL=https://pre-alpha-dev-1.ika.ika-network.net:443
+IKA_PROGRAM_ID=87W54kGYFQ1rgWqMeu4XTPHWXWmXSQCcjm8vCTfiq1oY
 
-```bash
-curl -X POST http://localhost:5173/api/devnet/wallet
-curl http://localhost:5173/api/devnet/status
-curl -X POST http://localhost:5173/api/devnet/airdrop -H "content-type: application/json" -d "{\"sol\":1}"
-```
-
-If the Solana faucet returns `429`, fund the wallet manually at:
-
-```text
-https://faucet.solana.com
-```
-
-## Encrypt Integration Shape
-
-The official Encrypt pre-alpha repo uses:
-
-- `encrypt-anchor::EncryptContext`
-- `encrypt_dsl::prelude::encrypt_fn`
-- `encrypt_types::encrypted::{EUint64, EBool}`
-- CPI accounts for config, deposit, CPI authority, caller program, network encryption key, payer, event authority, and system program
-
-IkaPayFi mirrors that pattern in:
-
-```text
-programs/ikapayfi_policy_engine/src/lib.rs
-programs/ikapayfi_policy_engine/src/encrypted_policy.rs
-```
-
-## Toolchain Status On This Machine
-
-Current status:
-
-- Rust/Cargo installed through rustup.
-- Solana/Agave CLI extracted to `C:\tmp\solana-release\solana-release\bin`.
-- Solana CLI verified: `solana-cli 3.1.14`.
-- Anchor CLI install attempted with `cargo install --git https://github.com/coral-xyz/anchor --tag v0.32.1 anchor-cli --locked`.
-- Anchor CLI install failed because Windows is missing the MSVC linker `link.exe`.
-
-Required unblock:
-
-- Install Visual Studio Build Tools with the Visual C++ workload, or use a Linux/WSL machine with Rust, Solana CLI, and Anchor installed.
-
-Until that linker exists, the Anchor program cannot be built or deployed from this machine.
-
-## Deploy Steps Once Toolchain Exists
-
-```bash
-solana config set --url devnet
-solana-keygen new --outfile .keys/deployer.json
-solana airdrop 2 .keys/deployer.json --url devnet
-anchor build
-anchor deploy --provider.cluster devnet --provider.wallet .keys/deployer.json
-```
-
-Then set:
-
-```text
-IKAPAYFI_PROGRAM_ID=<deployed program id>
+# IkaPayFi (set after anchor deploy)
+IKAPAYFI_PROGRAM_ID=<your-deployed-program-id>
 ```
