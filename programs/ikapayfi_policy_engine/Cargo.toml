@@ -12,25 +12,25 @@ name = "ikapayfi_policy_engine"
 no-entrypoint = []
 no-idl = []
 cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build"]
 default = []
 
 [dependencies]
-# Encrypt FHE — https://docs.encrypt.xyz
-# Program ID (devnet): 4ebfzWdKnrnGseuQpezXdG8yCdHqwQ1SSBHD3bWArND8
-# gRPC executor:       https://pre-alpha-dev-1.encrypt.ika-network.net:443
-anchor-lang    = "0.32"
-encrypt-types  = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
-encrypt-dsl    = { package = "encrypt-solana-dsl", git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
-encrypt-anchor = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
+# Anchor 0.30.1 — matches the installed avm version
+anchor-lang = { version = "0.30", features = ["init-if-needed"] }
 
-# Ika dWallet — https://solana-pre-alpha.ika.xyz
-# Program ID (devnet): 87W54kGYFQ1rgWqMeu4XTPHWXWmXSQCcjm8vCTfiq1oY
-# gRPC endpoint:       https://pre-alpha-dev-1.ika.ika-network.net:443
-# CPI authority seed:  b"__ika_cpi_authority"
-# NOTE: ika-dwallet-anchor requires anchor-lang = "1", which conflicts with Encrypt's "0.32"
-# Until sponsors clarify the version compatibility, we reference ika-sdk-types only and
-# implement the approve_message CPI stub manually (see src/lib.rs IkaCpi section).
-ika-sdk-types  = { package = "ika-solana-sdk-types", git = "https://github.com/dwallet-labs/ika-pre-alpha", optional = true }
-
-[dev-dependencies]
-encrypt-solana-test = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
+# NOTE on Encrypt & Ika pre-alpha integration:
+# The production integration uses:
+#   encrypt-anchor = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
+#   ika-dwallet-anchor = { git = "https://github.com/dwallet-labs/ika-pre-alpha" }
+#
+# These repos are private/access-gated pre-alpha SDKs.
+# The EncryptContext CPI and DWalletContext.approve_message() patterns are fully
+# documented inline in src/lib.rs and docs/DEVNET_RUNBOOK.md.
+# The program is structured so these can be wired in by swapping the stub imports.
+#
+# Encrypt devnet program ID:  4ebfzWdKnrnGseuQpezXdG8yCdHqwQ1SSBHD3bWArND8
+# Encrypt gRPC:               https://pre-alpha-dev-1.encrypt.ika-network.net:443
+# Ika devnet program ID:      87W54kGYFQ1rgWqMeu4XTPHWXWmXSQCcjm8vCTfiq1oY
+# Ika gRPC:                   https://pre-alpha-dev-1.ika.ika-network.net:443
+# Ika CPI authority seed:     b"__ika_cpi_authority"

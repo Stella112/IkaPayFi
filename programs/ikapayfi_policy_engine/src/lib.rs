@@ -1,12 +1,17 @@
 #![allow(unexpected_cfgs)]
 
 use anchor_lang::prelude::*;
-use encrypt_anchor::EncryptContext;
+use encrypt_stub::EncryptContext;
 
+// Encrypt FHE integration — see encrypt_stub.rs for the CPI interface documentation.
+// In production: `use encrypt_anchor::EncryptContext;`
+mod encrypt_stub;
 mod encrypted_policy;
 
-// Updated with a unique program ID for the submission
-declare_id!("IkaPayFi111111111111111111111111111111111");
+
+
+// Program ID derived from target/deploy/ikapayfi_policy_engine-keypair.json
+declare_id!("54Rek86pHBP5V6GM4MieoMSup1ueVtuS56Tqz9SQXetb");
 
 pub const VAULT_SEED: &[u8] = b"ikapayfi-vault";
 

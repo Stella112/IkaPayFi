@@ -3,7 +3,7 @@ seeds = false
 skip-lint = false
 
 [programs.devnet]
-ikapayfi_policy_engine = "IkaPayFi111111111111111111111111111111111"
+ikapayfi_policy_engine = "54Rek86pHBP5V6GM4MieoMSup1ueVtuS56Tqz9SQXetb"
 
 [provider]
 cluster = "devnet"
