@@ -8,13 +8,13 @@
 
 ## Problem
 
-Nigerian freelancers, remote workers, and DAOs receive global payments daily but suffer from:
+Freelancers, remote workers, and DAOs around the world receive cross-chain payments daily but suffer from:
 
 - **High fees, delays, and liquidity fragmentation** across chains
-- **Zero privacy** — balances visible to anyone on a public explorer
-- **Manual payroll and subscription management** with no programmable control
+- **Zero privacy** — balances and payroll amounts visible to anyone on a public explorer
+- **Manual payroll and subscription management** with no programmable, policy-driven control
 
-Existing solutions are either centralized (risky) or lack privacy + bridgeless power.
+Whether you're in Lagos, London, Buenos Aires, or Manila — existing solutions are either centralized (risky) or lack privacy + bridgeless power.
 
 ---
 
@@ -41,11 +41,12 @@ Computations on balances, splits, and streaming logic happen directly on encrypt
 
 ---
 
-## Target Users & Use Cases
+#### Target Users & Use Cases
 
-- **Nigerian freelancers** receiving payments from Upwork/clients abroad.
-- **Remote teams & small DAOs** managing multi-chain payroll/treasuries.
-- **Families or groups** sharing expenses privately.
+- **Global freelancers** (Upwork, Toptal, Fiverr) receiving cross-chain payments from international clients.
+- **Remote-first teams & DAOs** managing multi-chain payroll and treasuries across borders.
+- **Families and diaspora** sending private remittances home without public exposure.
+- **Small funds and indie studios** enforcing encrypted spending policies on shared wallets.
 
 ---
 
@@ -158,8 +159,8 @@ data/                         Persisted vault state (ikapayfi-db.json)
 |---|---|
 | **Core Integration** | Ika is fundamental to every action — no Ika = no product |
 | **Innovation** | First private bridgeless PayFi platform with encrypted agentic payroll on Solana |
-| **Product Potential** | Solves massive real-world pain with clear adoption (freelancers, DAOs, families) |
-| **Impact** | Institutional-grade privacy + interoperability for everyday users |
+| **Product Potential** | Global market — freelancers, DAOs, diaspora, remote teams across 190+ countries |
+| **Impact** | Institutional-grade privacy + interoperability for everyday users worldwide |
 | **Usability** | Polished MVP with wow-factor demo, WebAuthn passkeys, zero-dependency UX |
 
 ---
@@ -185,3 +186,5 @@ See [`docs/PREALPHA_NOTES.md`](docs/PREALPHA_NOTES.md) and [`docs/DEVNET_RUNBOOK
 | **Yash** | Frontend, Passkeys & Demo |
 
 Built for the **Solana ecosystem** and the **Ika/Encrypt Frontier Hackathon** 🛡️
+
+> IkaPayFi is for everyone — Lagos, London, São Paulo, Singapore, and everywhere in between.

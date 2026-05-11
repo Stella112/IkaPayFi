@@ -19,7 +19,7 @@ The first private bridgeless PayFi super app — receive native assets from any 
 ---
 
 ## Problem
-Nigerian freelancers, remote workers, and DAOs receive global payments daily but suffer from high fees, zero privacy, and manual financial management with no programmable control.
+Freelancers, remote workers, and DAOs around the world receive global payments daily but suffer from high fees, zero privacy, and manual financial management with no programmable control. Whether in Lagos, London, São Paulo, or Singapore — existing solutions are either centralized or lack privacy + bridgeless power.
 
 ## Solution
 IkaPayFi combines Ika dWallets (bridgeless custody) and Encrypt FHE (privacy) to create a fully private, programmable vault that feels like a modern fintech app.
@@ -35,10 +35,10 @@ All balances, payment amounts, splits, and policy checks run as encrypted comput
 ---
 
 ## Target Users
-- Nigerian freelancers receiving international payments
-- Remote teams and small DAOs running payroll
-- Families sharing expenses privately
-- Small funds needing custody policies
+- Global freelancers (Upwork, Toptal, Fiverr) receiving international payments
+- Remote-first teams and DAOs managing cross-chain payroll
+- Diaspora families sending private remittances
+- Small funds enforcing encrypted spending policies on shared wallets
 
 ---
 
