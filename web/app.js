@@ -37,6 +37,7 @@ const labels = {
 
 // Wallet UI
 const connectWalletBtn    = document.querySelector("#connectWalletBtn");
+const gatePasskeyBtn      = document.querySelector("#gatePasskeyBtn");
 const gateConnectBtn      = document.querySelector("#gateConnectBtn");
 const walletDropdown      = document.querySelector("#walletDropdown");
 const walletList          = document.querySelector("#walletList");
@@ -574,6 +575,7 @@ assetSelect.addEventListener("change", () => {
 });
 
 passkeyButton.addEventListener("click", bindPasskey);
+if (gatePasskeyBtn) gatePasskeyBtn.addEventListener("click", bindPasskey);
 
 resetButton.addEventListener("click", async () => {
   if (!confirm("Reset vault? This clears all inflows and audit history.")) return;

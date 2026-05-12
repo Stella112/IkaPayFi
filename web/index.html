@@ -252,14 +252,24 @@
       <div id="walletGate" class="wallet-gate">
         <div class="gate-card glass-panel">
           <div class="gate-orb">🔐</div>
-          <h2>Connect Your Solana Wallet</h2>
-          <p>IkaPayFi uses your Solana wallet as the owner of your Ika dWallet. All policy actions are signed by you — no private key exposure.</p>
-          <button class="btn btn-primary btn-full" id="gateConnectBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2z"/></svg>
-            Connect Wallet to Start
-          </button>
-          <div class="supported-wallets">
-            <span>Supports:</span> <strong>Phantom</strong> · <strong>Solflare</strong> · <strong>Backpack</strong>
+          <h2>Connect to IkaPayFi</h2>
+          <p>IkaPayFi uses your Solana wallet or a device passkey as the owner of your Ika dWallet. All policy actions are signed by you — no private key exposure.</p>
+          <div class="gate-actions" style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
+            <button class="btn btn-primary btn-full" id="gatePasskeyBtn" style="background: var(--bg-surface); border: 1px solid var(--border-color); color: var(--text-main);">
+              🔑 Sign in with Passkey
+            </button>
+            <div style="display: flex; align-items: center; text-align: center; color: var(--text-muted); font-size: 12px;">
+              <hr style="flex: 1; border-color: var(--border-color);">
+              <span style="padding: 0 10px;">OR</span>
+              <hr style="flex: 1; border-color: var(--border-color);">
+            </div>
+            <button class="btn btn-primary btn-full" id="gateConnectBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2z"/></svg>
+              Connect Solana Wallet
+            </button>
+          </div>
+          <div class="supported-wallets" style="margin-top: 24px;">
+            <span>Supports:</span> <strong>Passkeys</strong> · <strong>Phantom</strong> · <strong>Solflare</strong>
           </div>
         </div>
       </div>
