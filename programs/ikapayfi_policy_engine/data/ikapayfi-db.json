@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "mode": "local-prealpha",
+  "createdAt": "2026-05-12T04:16:15.687Z",
+  "updatedAt": "2026-05-12T07:32:03.450Z",
+  "vault": {
+    "id": "vault_lagos_freelancer_001",
+    "name": "Lagos Freelancer Vault",
+    "owner": "Amina Okafor",
+    "region": "Nigeria",
+    "passkeyBound": true,
+    "ikaDwallet": "ika-devnet-dwallet-demo-7Ghs...K91",
+    "solanaPolicyPda": "IkaFirePolicyPDA7ms...PayFi",
+    "period": "May 2026",
+    "policy": {
+      "savingsBps": 2500,
+      "familyBps": 2000,
+      "billsBps": 3000,
+      "spendLimitCents": 90000,
+      "currency": "USD"
+    },
+    "balances": {
+      "savings": 81250,
+      "family": 65000,
+      "bills": 97500,
+      "spendable": 81250
+    },
+    "passkeys": [
+      {
+        "id": "local-passkey-ttW3zBSLztouFTCJCeRLF9Zbo2cTuIR9Z9RaCR99lMI",
+        "label": "Primary device passkey",
+        "at": "2026-05-12T06:59:25.553Z"
+      }
+    ],
+    "status": "ACTIVE"
+  },
+  "devnet": {
+    "wallet": {
+      "publicKey": "7dM2i8viCyGcHTAvZhzjjD9HPtGGydbQKKiHAYhyPbcb",
+      "secretKey": [
+        221,
+        80,
+        168,
+        96,
+        103,
+        70,
+        104,
+        10,
+        98,
+        110,
+        172,
+        161,
+        90,
+        197,
+        60,
+        229,
+        9,
+        195,
+        168,
+        219,
+        139,
+        165,
+        78,
+        109,
+        158,
+        159,
+        150,
+        2,
+        191,
+        33,
+        189,
+        40,
+        98,
+        117,
+        173,
+        150,
+        143,
+        49,
+        26,
+        174,
+        75,
+        90,
+        205,
+        144,
+        241,
+        113,
+        170,
+        78,
+        65,
+        127,
+        182,
+        202,
+        42,
+        173,
+        157,
+        5,
+        94,
+        150,
+        134,
+        170,
+        22,
+        237,
+        197,
+        8
+      ],
+      "createdAt": "2026-05-12T07:31:55.829Z"
+    },
+    "encryptAccounts": {
+      "encryptProgram": "4ebfzWdKnrnGseuQpezXdG8yCdHqwQ1SSBHD3bWArND8",
+      "configPda": "EyqsEJaq86kqAbF3bNKQ3ydzAFXJZ5e8tuNr89CcmcH3",
+      "eventAuthority": "6Lu2AnYtC1HQHYjAovF2yykDq5ESjy9rUfxNATBamgAQ",
+      "depositPda": "uXTzZpoqxzpsgUJ9QocsPNGS4p788Do2dpEWfnoFEcR",
+      "depositBump": 247,
+      "networkKeyPda": "2YP2nxFoYcDFDBRygrN7C3Y3ENdcoaLjVeAmbX8HHwur",
+      "networkKeyHex": "5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "lastAirdropSignature": null,
+    "lastCheckedAt": "2026-05-12T07:32:03.450Z"
+  },
+  "inflows": [
+    {
+      "id": "inflow_945a43f92264",
+      "at": "2026-05-12T07:00:07.779Z",
+      "inflow": {
+        "sourceChain": "Ethereum",
+        "asset": "ETH",
+        "amountCents": 325000,
+        "sender": "Remote Studio DAO",
+        "memo": "Private payroll inflow"
+      },
+      "allocations": [
+        {
+          "key": "savings",
+          "label": "Savings",
+          "amountCents": 81250,
+          "privateFormatted": "$812.50",
+          "ciphertextId": "ct_02b54a4ac781...cb041d"
+        },
+        {
+          "key": "family",
+          "label": "Family",
+          "amountCents": 65000,
+          "privateFormatted": "$650.00",
+          "ciphertextId": "ct_31073a425a56...518a50"
+        },
+        {
+          "key": "bills",
+          "label": "Bills",
+          "amountCents": 97500,
+          "privateFormatted": "$975.00",
+          "ciphertextId": "ct_12fa6b76fe94...917ad5"
+        },
+        {
+          "key": "spendable",
+          "label": "Spendable",
+          "amountCents": 81250,
+          "privateFormatted": "$812.50",
+          "ciphertextId": "ct_e621d745000f...d1efc0"
+        }
+      ],
+      "publicTrace": [
+        {
+          "label": "Vault policy PDA",
+          "value": "IkaFirePolicyPDA7ms...PayFi"
+        },
+        {
+          "label": "Ika dWallet",
+          "value": "ika-devnet-dwallet-demo-7Ghs...K91"
+        },
+        {
+          "label": "Graph",
+          "value": "encrypted_split_eth"
+        },
+        {
+          "label": "Outputs",
+          "value": "ct_02b54a4ac781...cb041d  ct_31073a425a56...518a50  ct_12fa6b76fe94...917ad5  ct_e621d745000f...d1efc0"
+        },
+        {
+          "label": "Approval",
+          "value": "policy_passed"
+        }
+      ],
+      "privateView": {
+        "formattedInflow": "$3,250.00",
+        "totalAfterSplit": "$3,250.00"
+      },
+      "policyDecision": {
+        "status": "PASS",
+        "reason": "Encrypted spendable bucket is within the private period limit.",
+        "encryptedLimit": "ct_d6b3c583ebff...4c38f2"
+      },
+      "status": "APPROVED"
+    }
+  ],
+  "approvals": [
+    {
+      "id": "ika_msg_d503078835",
+      "inflowId": "inflow_945a43f92264",
+      "at": "2026-05-12T07:00:07.779Z",
+      "canSign": true,
+      "message": "IkaFire can approve the dWallet payout message.",
+      "mode": "local-prealpha"
+    }
+  ],
+  "auditLog": [
+    {
+      "id": "evt_a0b4b4de59e8",
+      "type": "DEVNET_AIRDROP_FAILED",
+      "at": "2026-05-12T07:32:01.166Z",
+      "message": "Solana devnet faucet did not fund the wallet."
+    },
+    {
+      "id": "evt_cdae167ca926",
+      "type": "DEVNET_WALLET_CREATED",
+      "at": "2026-05-12T07:31:55.858Z",
+      "message": "Local Solana devnet wallet created."
+    },
+    {
+      "id": "evt_070bf2acf16c",
+      "type": "IKA_APPROVAL_CREATED",
+      "at": "2026-05-12T07:00:07.781Z",
+      "message": "IkaFire can approve the dWallet payout message."
+    },
+    {
+      "id": "evt_338deb2f3fd3",
+      "type": "POLICY_UPDATED",
+      "at": "2026-05-12T07:00:07.498Z",
+      "message": "Encrypted allocation policy updated."
+    },
+    {
+      "id": "evt_4060223e47fb",
+      "type": "PASSKEY_REGISTERED",
+      "at": "2026-05-12T06:59:25.573Z",
+      "message": "Passkey registered for vault access."
+    },
+    {
+      "id": "evt_bootstrap",
+      "type": "VAULT_BOOTSTRAPPED",
+      "at": "2026-05-12T04:16:15.687Z",
+      "message": "IkaPayFi vault initialized in local pre-alpha mode."
+    }
+  ],
+  "challenges": {}
+}

@@ -1,9 +1,13 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
-import { extname, join, normalize } from "node:path";
+import { dirname, extname, join, normalize } from "node:path";
 import { handleApi, sendJson } from "../src/server/api.mjs";
 
-const root = process.cwd();
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const root = join(__dirname, "..");
 const port = Number(process.env.PORT ?? 5173);
 
 const types = {

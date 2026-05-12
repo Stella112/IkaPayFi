@@ -1,0 +1,420 @@
+/* ═══════════════════════════════════════════════
+   IkaPayFi Landing Page — Exact Lovable Match
+   ═══════════════════════════════════════════════ */
+
+/* Reset for landing */
+.landing-mode #app-shell { display: none !important; }
+body:not(.landing-mode) #view-landing { display: none !important; }
+body:not(.landing-mode) #app-shell { display: grid !important; }
+
+/* ── NAV ── */
+.lp-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.lp-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.lp-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #f8fafc;
+  cursor: default;
+}
+.lp-brand-icon {
+  width: 34px; height: 34px;
+  background: #0ea5e9;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #020617;
+}
+.lp-nav-links {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+}
+.lp-nav-links a {
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.lp-nav-links a:hover { color: #f8fafc; }
+.lp-open-btn {
+  margin-left: 24px;
+  padding: 10px 20px;
+  background: #1e40af;
+  color: #f8fafc;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.lp-open-btn:hover { background: #2563eb; }
+
+/* ── HERO ── */
+.lp-hero {
+  padding: 100px 24px 80px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, rgba(14,165,233,0.12) 0%, transparent 60%);
+}
+.lp-hero-inner { max-width: 760px; margin: 0 auto; }
+
+.lp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(14,165,233,0.1);
+  border: 1px solid rgba(14,165,233,0.25);
+  border-radius: 100px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-bottom: 32px;
+}
+.lp-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  flex-shrink: 0;
+}
+.lp-hero-title {
+  font-size: clamp(2.8rem, 7vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #f8fafc;
+  margin-bottom: 24px;
+}
+.lp-accent { color: #0ea5e9; }
+
+.lp-hero-sub {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+.lp-hero-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.lp-btn-primary {
+  padding: 14px 28px;
+  background: #0ea5e9;
+  color: #020617;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lp-btn-primary:hover {
+  background: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14,165,233,0.35);
+}
+.lp-btn-ghost {
+  padding: 14px 28px;
+  background: transparent;
+  color: #f8fafc;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lp-btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35); }
+
+.lp-hero-checks {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+.lp-hero-checks span { display: flex; align-items: center; gap: 6px; }
+
+/* ── SHARED SECTIONS ── */
+.lp-section { padding: 80px 24px; }
+.lp-container { max-width: 1100px; margin: 0 auto; }
+
+.lp-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0ea5e9;
+  margin-bottom: 16px;
+}
+.lp-section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.lp-section-title-center {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.lp-section-sub-center {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-bottom: 48px;
+}
+
+/* ── WHAT IS IKAPAYFI ── */
+.lp-what { border-top: 1px solid rgba(255,255,255,0.07); }
+.lp-what-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 720px;
+}
+.lp-what-body p { color: #94a3b8; font-size: 1rem; line-height: 1.75; }
+.lp-what-body strong { color: #f8fafc; }
+.lp-link { color: #0ea5e9; }
+
+/* ── CARDS ── */
+.lp-card {
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px;
+  transition: all 0.2s;
+}
+.lp-card:hover {
+  border-color: rgba(14,165,233,0.25);
+  transform: translateY(-3px);
+}
+.lp-card-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.lp-card h3 { font-size: 1rem; font-weight: 700; color: #f8fafc; margin-bottom: 8px; }
+.lp-card p { font-size: 0.9rem; color: #64748b; line-height: 1.6; }
+
+/* ── FEATURE GRID ── */
+.lp-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── STEPS GRID ── */
+.lp-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.lp-step-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0ea5e9;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+.lp-link-text { color: #0ea5e9; font-size: 0.9rem; line-height: 1.6; }
+
+/* ── USE CASE GRID ── */
+.lp-use-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ── CTA ── */
+.lp-cta {
+  padding: 60px 24px 80px;
+}
+.lp-cta-box {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 60px 40px;
+  text-align: center;
+}
+.lp-cta-box h2 { font-size: 1.8rem; font-weight: 800; color: #f8fafc; margin-bottom: 16px; letter-spacing: -0.02em; }
+.lp-cta-box p { color: #94a3b8; font-size: 1rem; margin-bottom: 32px; line-height: 1.6; }
+
+/* ── FOOTER ── */
+.lp-footer {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .lp-feature-grid, .lp-steps-grid { grid-template-columns: 1fr 1fr; }
+  .lp-use-grid { grid-template-columns: 1fr 1fr; }
+  .lp-nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .lp-feature-grid, .lp-steps-grid, .lp-use-grid { grid-template-columns: 1fr; }
+  .lp-hero-btns { flex-direction: column; align-items: center; }
+  .lp-hero-checks { flex-direction: column; align-items: center; gap: 12px; }
+  .lp-footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ── THEME TOGGLE ── */
+.lp-theme-toggle {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  line-height: 1;
+}
+.lp-theme-toggle:hover {
+  background: rgba(255,255,255,0.12);
+  transform: scale(1.1);
+}
+
+/* ── ENCRYPTION OVERLAY ── */
+.encrypt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+.encrypt-overlay[hidden] { display: none !important; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.encrypt-modal {
+  background: #0f172a;
+  border: 1px solid rgba(14,165,233,0.3);
+  border-radius: 24px;
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 0 60px rgba(14,165,233,0.15);
+}
+
+.encrypt-orb-wrap {
+  position: relative;
+  width: 80px; height: 80px;
+  margin: 0 auto 24px;
+}
+.encrypt-orb {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #0ea5e9;
+  border-right-color: #0ea5e9;
+  animation: spin 0.8s linear infinite;
+}
+.encrypt-lock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.encrypt-modal h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 16px;
+}
+.encrypt-bytes {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: #0ea5e9;
+  letter-spacing: 0.05em;
+  word-break: break-all;
+  min-height: 36px;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+.encrypt-sub {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.encrypt-sub code {
+  color: #0ea5e9;
+  background: rgba(14,165,233,0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* ── LIGHT MODE OVERRIDES ── */
+body.light-mode {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+body.light-mode .lp-nav {
+  background: rgba(241, 245, 249, 0.92);
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+body.light-mode .lp-brand { color: #0f172a; }
+body.light-mode .lp-nav-links a { color: #475569; }
+body.light-mode .lp-nav-links a:hover { color: #0f172a; }
+body.light-mode .lp-open-btn { background: #0ea5e9; color: #fff; }
+body.light-mode .lp-hero-title { color: #0f172a; }
+body.light-mode .lp-hero-sub { color: #475569; }
+body.light-mode .lp-section-title,
+body.light-mode .lp-section-title-center { color: #0f172a; }
+body.light-mode .lp-section-sub-center { color: #475569; }
+body.light-mode .lp-what-body p { color: #475569; }
+body.light-mode .lp-what-body strong { color: #0f172a; }
+body.light-mode .lp-card {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+body.light-mode .lp-card h3 { color: #0f172a; }
+body.light-mode .lp-card p { color: #64748b; }
+body.light-mode .lp-cta-box {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.08);
+}
+body.light-mode .lp-cta-box h2 { color: #0f172a; }
+body.light-mode .lp-cta-box p { color: #475569; }
+body.light-mode .lp-footer { color: #94a3b8; border-top-color: rgba(0,0,0,0.08); }
+body.light-mode .lp-hero { background: radial-gradient(ellipse at 50% 0%, rgba(14,165,233,0.08) 0%, transparent 60%); }
+body.light-mode .lp-theme-toggle { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }

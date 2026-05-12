@@ -3,19 +3,188 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IkaPayFi | Private Bridgeless Payroll</title>
+  <title>IkaPayFi — Private Bridgeless PayFi on Solana</title>
   <meta name="description" content="Private bridgeless payroll and remittance on Solana using Encrypt FHE and Ika dWallets." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/web/styles.css" />
+  <link rel="stylesheet" href="/web/landing.css" />
 </head>
-<body>
-  <div class="app-shell">
+<body class="landing-mode">
 
-    <!-- Sidebar -->
+  <!-- ══ LANDING PAGE ══ -->
+  <div id="view-landing" class="view">
+
+    <!-- NAV -->
+    <nav class="lp-nav">
+      <div class="lp-nav-inner">
+        <div class="lp-brand">
+          <div class="lp-brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span>IkaPayFi</span>
+        </div>
+        <div class="lp-nav-links">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#use-cases">Use cases</a>
+        </div>
+        <button id="themeToggle" class="lp-theme-toggle" title="Toggle light/dark mode" onclick="toggleTheme()">☀️</button>
+        <button class="lp-open-btn" onclick="showView('dashboard')">Open App →</button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="lp-hero">
+      <div class="lp-hero-inner">
+        <div class="lp-badge">
+          <span class="lp-dot"></span>
+          Built on Solana · Powered by Ika dWallets &amp; Encrypt FHE
+        </div>
+        <h1 class="lp-hero-title">Private bridgeless<br><span class="lp-accent">PayFi</span> for the world.</h1>
+        <p class="lp-hero-sub">Receive, hold, and program money from any chain — Bitcoin, Ethereum, stablecoins — inside one encrypted vault. No bridges. No custodians. No public balances.</p>
+        <div class="lp-hero-btns">
+          <button class="lp-btn-primary" onclick="showView('dashboard')">Launch Dashboard →</button>
+          <button class="lp-btn-ghost" onclick="document.querySelector('#features').scrollIntoView({behavior:'smooth'})">See how it works</button>
+        </div>
+        <div class="lp-hero-checks">
+          <span>✓ Encrypted on-chain balances</span>
+          <span>✓ Passkey login</span>
+          <span>✓ No bridges</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IS IKAPAYFI -->
+    <section class="lp-section lp-what" id="about">
+      <div class="lp-container">
+        <p class="lp-eyebrow">What is IkaPayFi</p>
+        <h2 class="lp-section-title">A private, bridgeless PayFi super app on Solana.</h2>
+        <div class="lp-what-body">
+          <p><strong>IkaPayFi</strong> is a private bridgeless PayFi super app built on Solana using <span class="lp-link">Ika dWallets</span> and <span class="lp-link">Encrypt FHE</span>. It lets freelancers, DAOs, remote teams and families receive and manage money from any blockchain — Bitcoin, Ethereum, stablecoins — inside a single programmable private vault, without bridges or centralized custodians.</p>
+          <p>Unlike traditional crypto wallets where balances and transactions are publicly visible, IkaPayFi keeps balances, payment amounts, allocation rules and spending limits fully encrypted on-chain via Encrypt FHE — while the policy logic still executes verifiably on Solana.</p>
+          <p>Inflows from any chain settle into your <strong>Ika dWallet</strong>, an encrypted programmable account bound to your Solana identity. From there, an on-chain policy engine automatically routes funds: payroll splits, savings buckets, family remittances, subscription payments, spending limits and shared treasury access — all enforced directly on Solana with web2-style passkey login.</p>
+          <p><strong>In simple terms:</strong> IkaPayFi turns Solana into a private global banking layer for payroll, remittances and programmable money movement across chains.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="lp-section lp-features" id="features">
+      <div class="lp-container">
+        <h2 class="lp-section-title-center">A private banking layer for crypto</h2>
+        <p class="lp-section-sub-center">Programmable money rules enforced directly on Solana — with web2-style UX.</p>
+        <div class="lp-feature-grid">
+          <div class="lp-card">
+            <div class="lp-card-icon">🔒</div>
+            <h3>FHE-encrypted balances</h3>
+            <p>Balances, payment amounts and payroll flows stay encrypted on chain via Encrypt.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">🌐</div>
+            <h3>Bridgeless multi-chain</h3>
+            <p>Receive BTC, ETH, USDC and more directly into one Ika dWallet — no wrapped assets.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">⚡</div>
+            <h3>Programmable rules</h3>
+            <p>Auto-split salary, savings, bills and family — enforced by code, not trust.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">🔑</div>
+            <h3>Passkey login</h3>
+            <p>Web2-style sign in. No seed phrases. Your keys, secured by your device.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">👥</div>
+            <h3>Shared treasuries</h3>
+            <p>DAOs and teams can co-manage encrypted vaults with policy-based access.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">📊</div>
+            <h3>Spending limits</h3>
+            <p>Encrypted spend limits keep budgets private — only the rule check is public.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="lp-section lp-how" id="how">
+      <div class="lp-container">
+        <h2 class="lp-section-title-center">How IkaPayFi works</h2>
+        <p class="lp-section-sub-center">Three steps from any chain to a private programmable vault.</p>
+        <div class="lp-steps-grid">
+          <div class="lp-card">
+            <div class="lp-step-num">01</div>
+            <h3>Connect a wallet</h3>
+            <p class="lp-link-text">Sign in with Phantom, Solflare or Backpack — or with a passkey on your device.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-step-num">02</div>
+            <h3>Bind an Ika dWallet</h3>
+            <p>Your encrypted vault is bound to your wallet. Inflows from any chain settle here.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-step-num">03</div>
+            <h3>Set allocation policy</h3>
+            <p>Define savings, family, bills, and spend limits. Encrypted, on chain, automatic.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section class="lp-section lp-use-cases" id="use-cases">
+      <div class="lp-container">
+        <h2 class="lp-section-title-center">Built for the way money actually moves</h2>
+        <div class="lp-use-grid">
+          <div class="lp-card">
+            <div class="lp-card-icon">💼</div>
+            <h3>Freelancers</h3>
+            <p>Get paid in any token. Auto-convert to stables. Stay private.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">🏛️</div>
+            <h3>DAOs &amp; teams</h3>
+            <p>Run encrypted payroll with shared treasury policies.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">🌍</div>
+            <h3>Remote workers</h3>
+            <p>Receive salary across chains, route savings &amp; bills automatically.</p>
+          </div>
+          <div class="lp-card">
+            <div class="lp-card-icon">👨‍👩‍👧</div>
+            <h3>Families</h3>
+            <p>Send remittances privately with spending rules and limits.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="lp-cta">
+      <div class="lp-cta-box">
+        <h2>Solana, but private. Banking, but programmable.</h2>
+        <p>Open the dashboard, bind a dWallet, and configure your first private allocation policy.</p>
+        <button class="lp-btn-primary" onclick="showView('dashboard')">Launch Dashboard →</button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="lp-footer">
+      <span>© 2026 IkaPayFi · Private Capital Markets</span>
+      <span>LOCAL-PREALPHA · Encrypt pre-alpha · Devnet only</span>
+    </footer>
+
+  </div><!-- /#view-landing -->
+
+  <!-- ══ APP SHELL ══ -->
+  <div id="app-shell" class="app-shell" hidden>
     <aside class="sidebar">
-      <div class="brand">
+      <div class="brand" onclick="showView('landing')" style="cursor:pointer">
         <div class="brand-mark">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
@@ -24,27 +193,12 @@
           <span>Private Capital Markets</span>
         </div>
       </div>
-
-      <nav class="nav">
-        <button class="nav-item active">
-          <span class="nav-icon">📊</span>
-          Dashboard
-        </button>
-        <button class="nav-item">
-          <span class="nav-icon">🛡️</span>
-          Policy Vault
-        </button>
-        <button class="nav-item">
-          <span class="nav-icon">💸</span>
-          Payrolls
-        </button>
-        <button class="nav-item">
-          <span class="nav-icon">⚡</span>
-          Integrations
-        </button>
+      <nav class="nav" id="sidebarNav">
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></button>
+        <button class="nav-item" data-view="policy"><span class="nav-icon">🛡️</span><span class="nav-label">Policy Vault</span></button>
+        <button class="nav-item" data-view="payrolls"><span class="nav-icon">💸</span><span class="nav-label">Payrolls</span><span class="nav-badge" id="pendingBadge" hidden>0</span></button>
+        <button class="nav-item" data-view="integrations"><span class="nav-icon">⚡</span><span class="nav-label">Integrations</span></button>
       </nav>
-
-      <!-- Wallet connection status in sidebar -->
       <div class="sidebar-wallet" id="sidebarWallet">
         <div class="wallet-dot" id="walletDot"></div>
         <div class="wallet-info">
@@ -52,36 +206,26 @@
           <span id="walletAddress" class="wallet-addr">Connect a Solana wallet</span>
         </div>
       </div>
-
       <div class="sidebar-footer">
         <div class="status-card">
-          <div class="status-header">
-            <span class="status-indicator online"></span>
-            <strong>IkaFire Engine</strong>
-          </div>
+          <div class="status-header"><span class="status-indicator online"></span><strong>IkaFire Engine</strong></div>
           <p id="integrationMode">Loading...</p>
         </div>
       </div>
     </aside>
 
-    <!-- Main content -->
     <main class="main-content">
-
-      <!-- Top bar -->
       <header class="topbar">
         <div class="welcome">
           <span class="eyebrow">IkaFire Policy Engine</span>
-          <h1>Vault Dashboard</h1>
+          <h1 id="pageTitle">Dashboard</h1>
         </div>
         <div class="actions">
-          <!-- Wallet connect button -->
           <div class="wallet-connect-wrap" id="walletConnectWrap">
             <button id="connectWalletBtn" class="btn btn-wallet">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2z"/></svg>
               Connect Wallet
             </button>
-
-            <!-- Wallet picker dropdown -->
             <div class="wallet-dropdown" id="walletDropdown" hidden>
               <p class="dropdown-heading">Select wallet</p>
               <div id="walletList" class="wallet-list"></div>
@@ -95,20 +239,16 @@
               </div>
             </div>
           </div>
-
-          <!-- Connected wallet chip (hidden until connected) -->
           <div id="walletChip" class="wallet-chip" hidden>
             <img id="walletChipIcon" src="" alt="" class="chip-icon" />
             <span id="walletChipAddress" class="chip-addr"></span>
             <button id="disconnectBtn" class="chip-disconnect" title="Disconnect">✕</button>
           </div>
-
-          <button id="walletButton" class="btn btn-secondary">Create Devnet Wallet</button>
           <button id="passkeyButton" class="btn btn-primary">🔑 Passkey</button>
         </div>
       </header>
 
-      <!-- Wallet gate — shown when no wallet connected -->
+      <!-- Wallet Gate -->
       <div id="walletGate" class="wallet-gate">
         <div class="gate-card glass-panel">
           <div class="gate-orb">🔐</div>
@@ -119,152 +259,285 @@
             Connect Wallet to Start
           </button>
           <div class="supported-wallets">
-            <span>Supports:</span>
-            <strong>Phantom</strong> · <strong>Solflare</strong> · <strong>Backpack</strong>
+            <span>Supports:</span> <strong>Phantom</strong> · <strong>Solflare</strong> · <strong>Backpack</strong>
           </div>
         </div>
       </div>
 
-      <!-- Dashboard (hidden until wallet connected) -->
-      <div id="dashboard" hidden>
-
-        <!-- Hero section: vault info + policy form -->
-        <section class="hero-section">
-
-          <!-- Left: vault balance + flow + metrics -->
-          <div class="glass-panel main-vault">
-            <div class="panel-header">
-              <div class="balance-display">
-                <span class="label">Total Private Balance</span>
-                <div id="privateInflow" class="amount">$0.00</div>
-              </div>
-              <div id="approvalBadge" class="badge">Ready</div>
-            </div>
-
+      <!-- App Views -->
+      <div id="appViews" hidden>
+        <section id="view-dashboard" class="view">
+          <div class="stat-grid">
+            <div class="stat-card glass-panel"><span class="stat-label">Total Private Balance</span><div id="statBalance" class="stat-value mono">$0.00</div><span class="stat-sub">Encrypted · FHE protected</span></div>
+            <div class="stat-card glass-panel"><span class="stat-label">Inflows Processed</span><div id="statInflows" class="stat-value">0</div><span class="stat-sub">This session</span></div>
+            <div class="stat-card glass-panel"><span class="stat-label">Policy Status</span><div id="statPolicy" class="stat-value accent">READY</div><span class="stat-sub">Ika dWallet bound</span></div>
+            <div class="stat-card glass-panel"><span class="stat-label">Pending Approvals</span><div id="statPending" class="stat-value warn">0</div><span class="stat-sub">Awaiting your signature</span></div>
+          </div>
+          <div class="glass-panel flow-panel">
+            <h2>Live Payment Flow</h2>
             <div class="flow-visualization">
-              <div class="node-group">
-                <div class="node eth">ETH</div>
-                <span class="node-label">Inflow</span>
-              </div>
+              <div class="node-group"><div class="node eth">ETH</div><span class="node-label">Inflow</span></div>
               <div class="connector"><div class="flow-line"></div></div>
-              <div class="node-group center">
-                <div class="vault-orb">
-                  <div class="orb-inner"></div>
-                  <span class="orb-icon">🔒</span>
-                </div>
-                <span class="node-label">Ika dWallet</span>
-              </div>
+              <div class="node-group center"><div class="vault-orb"><div class="orb-inner"></div><span class="orb-icon">🔒</span></div><span class="node-label">Ika dWallet</span></div>
               <div class="connector"><div class="flow-line"></div></div>
-              <div class="node-group">
-                <div class="node sol">SOL</div>
-                <span class="node-label">Policy</span>
-              </div>
+              <div class="node-group"><div class="node sol">SOL</div><span class="node-label">Policy</span></div>
             </div>
-
             <div class="metric-grid">
-              <div class="metric-card">
-                <span class="label">Source Chain</span>
-                <strong id="sourceChain">—</strong>
+              <div class="metric-card"><span class="label">Source Chain</span><strong id="sourceChain">—</strong></div>
+              <div class="metric-card"><span class="label">Asset Kind</span><strong id="asset">—</strong></div>
+              <div class="metric-card"><span class="label">Policy Result</span><strong id="policyState">—</strong></div>
+            </div>
+          </div>
+          <div class="glass-panel">
+            <div class="panel-header">
+              <h2>Recent Inflows</h2>
+              <button class="btn btn-secondary btn-sm" onclick="showView('payrolls')">View All Payrolls →</button>
+            </div>
+            <div id="recentList" class="history-list"><div class="empty-state">No inflows recorded yet. Go to Policy Vault to submit one.</div></div>
+          </div>
+        </section>
+
+        <section id="view-policy" class="view" hidden>
+          <div class="two-col">
+            <div class="glass-panel policy-config">
+              <div class="panel-header compact">
+                <div><h2>Allocation Policy</h2><p class="muted-text">Set how incoming payments are split across buckets</p></div>
+                <button id="resetButton" class="btn-text">Reset Vault</button>
               </div>
-              <div class="metric-card">
-                <span class="label">Asset Kind</span>
-                <strong id="asset">—</strong>
+              <form id="policyForm" class="policy-form">
+                <!-- Payroll Details -->
+                <div class="form-section-label">Payroll Details</div>
+                <div class="input-group">
+                  <label for="recipientAddress">Recipient Wallet Address</label>
+                  <input type="text" id="recipientAddress" placeholder="e.g. 9xQ3...7rFz (Solana address)" autocomplete="off" />
+                </div>
+                <div class="input-row">
+                  <div class="input-group">
+                    <label for="senderInput">Employee / Contractor Name</label>
+                    <input type="text" id="senderInput" placeholder="e.g. Alice Chen" />
+                  </div>
+                  <div class="input-group">
+                    <label for="payrollRef">Payment Reference</label>
+                    <input type="text" id="payrollRef" placeholder="e.g. INV-2026-042" />
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label for="payrollDesc">Description / Purpose</label>
+                  <input type="text" id="payrollDesc" placeholder="e.g. May 2026 salary — engineering services" />
+                </div>
+
+                <!-- Payment Setup -->
+                <div class="form-section-label" style="margin-top:20px">Payment Setup</div>
+                <div class="input-row">
+                  <div class="input-group">
+                    <label for="assetSelect">Inflow Asset</label>
+                    <select id="assetSelect"></select>
+                  </div>
+                  <div class="input-group">
+                    <label for="amountInput">Amount (USD)</label>
+                    <input type="number" id="amountInput" step="0.01" min="0" placeholder="Enter amount" />
+                  </div>
+                </div>
+
+                <!-- Allocation Sliders -->
+                <div class="form-section-label" style="margin-top:20px">Allocation Policy</div>
+                <div class="sliders">
+                  <div class="slider-field"><label>Savings <span id="savingsLabel" class="value-tag">25%</span></label><input type="range" id="savingsInput" min="0" max="60" value="25" /></div>
+                  <div class="slider-field"><label>Family <span id="familyLabel" class="value-tag">20%</span></label><input type="range" id="familyInput" min="0" max="60" value="20" /></div>
+                  <div class="slider-field"><label>Bills <span id="billsLabel" class="value-tag">30%</span></label><input type="range" id="billsInput" min="0" max="60" value="30" /></div>
+                </div>
+                <div class="input-group">
+                  <label for="limitInput">Encrypted Spend Limit (USD)</label>
+                  <input type="number" id="limitInput" placeholder="e.g. 500" />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" style="margin-top:24px">
+                  🔒 Commit Policy &amp; Record Inflow
+                </button>
+              </form>
+            </div>
+            <div class="glass-panel allocations-panel">
+              <div class="panel-header">
+                <div><h2>Encrypted Buckets</h2><p class="muted-text">FHE-protected allocation outputs</p></div>
+                <div id="approvalBadge" class="badge">Ready</div>
               </div>
-              <div class="metric-card">
-                <span class="label">Policy Result</span>
-                <strong id="policyState">—</strong>
-              </div>
+              <div class="balance-display" style="margin-bottom:24px"><span class="label">Vault Balance</span><div id="privateInflow" class="amount">$0.00</div></div>
+              <div id="allocations" class="allocation-list"><div class="empty-state">Submit an inflow to see allocation outputs.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-payrolls" class="view" hidden>
+          <!-- Payroll header stats -->
+          <div class="payrolls-header glass-panel">
+            <div>
+              <h2>Payroll Approvals</h2>
+              <p class="muted-text">Review each inflow split and approve signing via your Ika dWallet</p>
+            </div>
+            <div class="payroll-stats">
+              <div class="pstat"><span id="pstatTotal">0</span><label>Total</label></div>
+              <div class="pstat accent"><span id="pstatPending">0</span><label>Pending</label></div>
+              <div class="pstat success"><span id="pstatApproved">0</span><label>Approved</label></div>
             </div>
           </div>
 
-          <!-- Right: policy config form -->
-          <div class="glass-panel policy-config">
-            <div class="panel-header compact">
-              <h2>Allocation Policy</h2>
-              <button id="resetButton" class="btn-text">Reset Vault</button>
-            </div>
-
-            <form id="policyForm" class="policy-form">
-              <div class="input-group">
-                <label for="assetSelect">Simulate Inflow Asset</label>
-                <select id="assetSelect"></select>
+          <!-- Batch Payroll Panel -->
+          <div class="glass-panel batch-panel">
+            <div class="panel-header">
+              <div>
+                <h2>🏛️ Batch Payroll Run</h2>
+                <p class="muted-text">Pay multiple recipients in one encrypted transaction — for DAOs, teams &amp; payroll admins</p>
               </div>
-
-              <div class="input-group">
-                <label for="amountInput">Amount (USD)</label>
-                <input type="number" id="amountInput" step="0.01" value="3250" />
-                <input type="hidden" id="senderInput" value="Remote Studio DAO" />
-              </div>
-
-              <div class="sliders">
-                <div class="slider-field">
-                  <label>Savings <span id="savingsLabel" class="value-tag">25%</span></label>
-                  <input type="range" id="savingsInput" min="0" max="60" value="25" />
-                </div>
-                <div class="slider-field">
-                  <label>Family <span id="familyLabel" class="value-tag">20%</span></label>
-                  <input type="range" id="familyInput" min="0" max="60" value="20" />
-                </div>
-                <div class="slider-field">
-                  <label>Bills <span id="billsLabel" class="value-tag">30%</span></label>
-                  <input type="range" id="billsInput" min="0" max="60" value="30" />
-                </div>
-              </div>
-
-              <div class="input-group">
-                <label for="limitInput">Encrypted Spend Limit (USD)</label>
-                <input type="number" id="limitInput" value="900" />
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-full">
-                Commit Policy &amp; Record Inflow
+              <button class="btn btn-secondary btn-sm" id="batchToggleBtn" onclick="toggleBatchPanel()">
+                + New Batch
               </button>
-            </form>
-          </div>
-        </section>
+            </div>
 
-        <!-- Details: allocations + history -->
-        <section class="details-section">
-          <div class="glass-panel allocations-panel">
-            <h3>Encrypted Bucket Allocations</h3>
-            <div id="allocations" class="allocation-list">
-              <div class="empty-state">Submit an inflow to see allocation outputs.</div>
+            <div id="batchForm" hidden>
+              <div class="batch-meta-row">
+                <div class="input-group">
+                  <label for="batchAsset">Payment Asset</label>
+                  <select id="batchAsset"></select>
+                </div>
+                <div class="input-group">
+                  <label for="batchRef">Batch Reference</label>
+                  <input type="text" id="batchRef" placeholder="e.g. May-2026-Payroll" />
+                </div>
+                <div class="input-group">
+                  <label for="batchDesc">Description</label>
+                  <input type="text" id="batchDesc" placeholder="e.g. Engineering team — May 2026" />
+                </div>
+              </div>
+
+              <div class="batch-recipients-header">
+                <span>Recipients</span>
+                <button class="btn btn-secondary btn-sm" onclick="addBatchRow()">+ Add recipient</button>
+              </div>
+
+              <div id="batchRecipients" class="batch-recipients">
+                <!-- Rows injected by JS -->
+              </div>
+
+              <div class="batch-footer-row">
+                <div class="batch-total-display">
+                  Batch Total: <strong id="batchTotalDisplay">$0.00</strong>
+                </div>
+                <button class="btn btn-primary" id="batchSubmitBtn" onclick="submitBatch()">
+                  🔒 Encrypt &amp; Submit Batch
+                </button>
+              </div>
             </div>
           </div>
 
-          <div class="glass-panel history-panel">
-            <h3>Inflow History</h3>
-            <div id="historyList" class="history-list">
-              <div class="empty-state">No inflows recorded yet.</div>
+          <!-- Individual payroll cards -->
+          <div id="payrollList" class="payroll-list">
+            <div class="empty-state" style="margin-top:24px">
+              No payrolls yet. Use <strong>Batch Payroll</strong> above or go to
+              <button class="link-btn" onclick="showView('policy')">Policy Vault</button> to record an inflow.
             </div>
           </div>
         </section>
 
-        <!-- Trace + audit -->
-        <section class="trace-section">
-          <div class="glass-panel trace-panel">
-            <h3>On-Chain Execution Trace</h3>
-            <div id="traceList" class="trace-list"></div>
-
-            <h3 style="margin-top: 28px;">Devnet Status</h3>
-            <div id="devnetList" class="trace-list"></div>
-
-            <div class="devnet-actions">
-              <button id="airdropButton" class="btn btn-secondary btn-sm">Airdrop SOL</button>
-              <button id="statusButton" class="btn btn-secondary btn-sm">Check Devnet</button>
+        <section id="view-integrations" class="view" hidden>
+          <div class="two-col">
+            <div class="glass-panel trace-panel">
+              <h2>On-Chain Execution Trace</h2>
+              <div id="traceList" class="trace-list"></div>
+              <h2 style="margin-top:32px">Devnet Status</h2>
+              <div id="devnetList" class="trace-list"></div>
+              <div class="devnet-actions">
+                <button id="walletButton" class="btn btn-secondary btn-sm">Create Devnet Wallet</button>
+                <button id="airdropButton" class="btn btn-secondary btn-sm">Airdrop SOL</button>
+                <button id="statusButton" class="btn btn-secondary btn-sm">Check Devnet</button>
+              </div>
+            </div>
+            <div class="glass-panel audit-panel">
+              <h2>System Audit Log</h2>
+              <div id="auditList" class="audit-list"></div>
             </div>
           </div>
-
-          <div class="glass-panel audit-panel">
-            <h3>System Audit Log</h3>
-            <div id="auditList" class="audit-list"></div>
-          </div>
         </section>
-
-      </div> <!-- /#dashboard -->
-
+      </div>
     </main>
   </div>
+
+  <!-- ══ ENCRYPTION OVERLAY ══ -->
+  <div id="encryptOverlay" class="encrypt-overlay" hidden>
+    <div class="encrypt-modal">
+      <div class="encrypt-orb-wrap">
+        <div class="encrypt-orb"></div>
+        <div class="encrypt-lock">🔒</div>
+      </div>
+      <h3 id="encryptStatus">Encrypting with FHE…</h3>
+      <div class="encrypt-bytes" id="encryptBytes"></div>
+      <p class="encrypt-sub">Running <code>payfi_split_graph</code> on encrypted ciphertexts</p>
+      <p class="encrypt-sub">Ika dWallet policy engine · Solana Devnet</p>
+    </div>
+  </div>
+
+  <script>
+    // ── Theme toggle ──────────────────────────────────────────────────────────
+    function toggleTheme() {
+      const isLight = document.body.classList.toggle('light-mode');
+      document.getElementById('themeToggle').textContent = isLight ? '🌙' : '☀️';
+      localStorage.setItem('ikapayfi-theme', isLight ? 'light' : 'dark');
+    }
+    // Restore saved theme
+    if (localStorage.getItem('ikapayfi-theme') === 'light') {
+      document.body.classList.add('light-mode');
+      const btn = document.getElementById('themeToggle');
+      if (btn) btn.textContent = '🌙';
+    }
+
+    // ── Encryption overlay ────────────────────────────────────────────────────
+    const HEX = '0123456789abcdef';
+    function randomHex(n) {
+      return Array.from({length: n}, () => HEX[Math.floor(Math.random()*16)]).join('');
+    }
+
+    window.showEncryptOverlay = function(message = 'Encrypting with FHE…', duration = 1800) {
+      const overlay = document.getElementById('encryptOverlay');
+      const status  = document.getElementById('encryptStatus');
+      const bytes   = document.getElementById('encryptBytes');
+      status.textContent = message;
+      overlay.hidden = false;
+
+      // Animate cipher bytes
+      let interval = setInterval(() => {
+        bytes.textContent = randomHex(64);
+      }, 60);
+
+      return new Promise(resolve => {
+        setTimeout(() => {
+          clearInterval(interval);
+          status.textContent = '✓ Graph committed on-chain';
+          bytes.textContent = '';
+          setTimeout(() => {
+            overlay.hidden = true;
+            resolve();
+          }, 600);
+        }, duration);
+      });
+    };
+
+    // ── Animated number counter ───────────────────────────────────────────────
+    window.animateCounter = function(el, target, prefix = '', suffix = '') {
+      if (!el) return;
+      const start    = 0;
+      const duration = 800;
+      const startTs  = performance.now();
+      const formatted = typeof target === 'string';
+      if (formatted) { el.textContent = prefix + target + suffix; return; }
+      function step(ts) {
+        const progress = Math.min((ts - startTs) / duration, 1);
+        const ease     = 1 - Math.pow(1 - progress, 3);
+        const current  = Math.round(start + (target - start) * ease);
+        el.textContent = prefix + current + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    };
+  </script>
 
   <script type="module" src="/web/app.js"></script>
 </body>

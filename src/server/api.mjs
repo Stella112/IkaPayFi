@@ -192,6 +192,28 @@ export async function handleApi(req, res, pathname) {
     });
   }
 
+  // POST /api/inflows/:id/approve — approve a payroll and record Ika message hash
+  const approveMatch = pathname.match(/^\/api\/inflows\/([^/]+)\/approve$/);
+  if (req.method === "POST" && approveMatch) {
+    const inflowId = approveMatch[1];
+    const body = await readJson(req);
+    const result = await updateDb((db) => {
+      const inflow = db.inflows.find((i) => i.id === inflowId);
+      if (!inflow) return { error: "Inflow not found" };
+      inflow.status = "APPROVED";
+      inflow.approvedAt = new Date().toISOString();
+      inflow.approvedMessageHash = body.messageHash ?? null;
+      applyAllocations(db.vault.balances, inflow.allocations);
+      db.auditLog.unshift(auditEvent(
+        "IKA_MESSAGE_APPROVED",
+        `Payroll ${inflowId} approved via Ika dWallet. Hash: ${(body.messageHash ?? "").slice(0, 16)}...`
+      ));
+      return { inflow };
+    });
+    if (result.error) return sendJson(res, 404, result);
+    return sendJson(res, 200, result);
+  }
+
   return sendJson(res, 404, { error: "API route not found" });
 }
 
