@@ -1,51 +1,48 @@
-# Demo Script
+# IkaPayFi — 2-Minute Demo Video Script
 
-Target length: 3-4 minutes.
+**Tips:** Keep it fast. Let the UI do the talking. Aim for ~90 seconds to 2 minutes.
 
-## 0:00 - 0:25 Problem
+---
 
-Nigerian freelancers, remote workers, and small DAOs receive money globally, but today they choose between bridges, centralized exchanges, public wallet exposure, and manual payroll operations.
+### 1. The Hook (0:00 - 0:20)
+**[Visual: Landing page hero section. Click 'Open App']**
 
-## 0:25 - 0:55 Product
+**Speaker:**
+"Global freelancers and DAOs need private, cross-chain payroll without the bridging hassle. 
+Meet IkaPayFi. We use **Ika dWallets** for native cross-chain custody, and **Encrypt FHE** to keep your payment splits and policies completely hidden on-chain."
 
-IkaPayFi is private bridgeless payroll and remittance infrastructure on Solana. Users receive native assets through Ika dWallets and automate money movement through encrypted policies.
+---
 
-## 0:55 - 1:40 Live Flow
+### 2. Private Policy Setup (0:20 - 0:40)
+**[Visual: Connect wallet (WebAuthn). Go to Policy Vault. Adjust sliders.]**
 
-Open the app and show the vault dashboard.
+**Speaker:**
+"After a quick passkey login, we set up our routing policy. I'm allocating 25% to Savings and 20% to Family. 
+These percentages aren't public. They are encrypted using Encrypt FHE, so the blockchain only ever sees ciphertext."
 
-Use the demo controls:
+---
 
-- Select an inflow asset: ETH, BTC, or USDC.
-- Enter a salary/remittance amount.
-- Set splits for savings, family, bills, and spendable balance.
-- Run the private policy simulation.
+### 3. Batch Payroll & FHE (0:40 - 1:10)
+**[Visual: Go to Payrolls. Click '+ New Batch'. Add 2 recipients and hit Submit.]**
 
-Narration:
+**Speaker:**
+"For DAOs, we built Batch Payroll. You add your team, hit submit, and watch.
+**[Visual: Pause briefly on the FHE Encryption overlay]**
+Our Solana program is now executing the `payfi_split_graph` entirely on encrypted data. No plaintext is ever exposed."
 
-The user sees real balances. The public chain only sees ciphertext identifiers and policy events.
+---
 
-## 1:40 - 2:30 Ika Integration
+### 4. Bridgeless Approval (1:10 - 1:40)
+**[Visual: Show the generated Payroll Cards. Click 'Approve & Sign'.]**
 
-Show the IkaFire approval panel.
+**Speaker:**
+"Once the FHE execution finishes, the payroll cards appear.
+When we hit 'Approve', the program verifies the encrypted spend limits. If it passes, it triggers an MPC signature from the Ika dWallet network. Funds are released natively on Ethereum or Bitcoin—zero bridging required."
 
-Narration:
+---
 
-Ika dWallets are the custody layer. The Solana policy program controls when the dWallet can sign. A payout only gets approved after policy checks pass.
+### 5. Outro (1:40 - 1:50)
+**[Visual: Briefly show the Audit Log with the ciphertexts.]**
 
-## 2:30 - 3:15 Encrypt Integration
-
-Show encrypted policy trace and ciphertext IDs.
-
-Narration:
-
-Encrypt computes on balances, split rules, and spend limits while those values remain encrypted. The app is designed so payroll amounts and remittance flows are not visible on explorers.
-
-## 3:15 - 4:00 Why It Wins
-
-Close with:
-
-- core Ika integration for bridgeless custody
-- core Encrypt integration for private financial logic
-- clear real-world users: freelancers, families, remote teams, DAOs
-- strong commercial path as payroll/remittance infrastructure
+**Speaker:**
+"Bridgeless payments. Complete privacy. That's IkaPayFi. Check out our live Devnet deployment. Thank you!"
