@@ -251,9 +251,9 @@ docs/
 
 ---
 
-## Demo Video
+## Future Roadmap: Agentic Layer
 
-> **[Link to 4-min demo]** — Live: wallet connect → set policy → encrypted inflow → FHE split → Ika approval → audit log.
+> **Next:** Full multi-chain agentic guardrails using Ika dWallets + on-chain policy triggers for autonomous payroll streaming and conditional payments.
 
 ---
 
