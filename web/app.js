@@ -7,7 +7,8 @@ import {
   isConnected,
   formatAddress,
   getAvailableWallets,
-  getInstallableWallets
+  getInstallableWallets,
+  setSimulatedWallet
 } from "./wallet.js";
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
@@ -668,6 +669,15 @@ async function bindPasskey() {
     body: { challenge: challenge.challenge, credentialId, label: "Primary device passkey" }
   });
   appState.vault = result.vault;
+
+  try {
+    const devnetRes = await api("/api/devnet/wallet", { method: "POST" });
+    appState.devnet = devnetRes;
+    setSimulatedWallet(devnetRes.wallet.publicKey);
+  } catch (err) {
+    showToast("Failed to initialize Devnet wallet: " + err.message, "error");
+  }
+
   await refresh();
 }
 
