@@ -1,7 +1,7 @@
 # IkaPayFi — Private Bridgeless PayFi for Global Payroll & Remittances
 
 > **Encrypt & Ika Frontier Hackathon** | Track: Bridgeless Capital Markets × Encrypted Capital Markets  
-> **Team:** Abhishek (Protocol) • Pratik (FHE Engine) • Yash (Frontend & Demo)
+> **Team:** Stellamaris • Jenny OLiver
 
 ---
 
@@ -310,9 +310,8 @@ See [`docs/PREALPHA_NOTES.md`](docs/PREALPHA_NOTES.md) and [`docs/DEVNET_RUNBOOK
 
 | | Name | Role |
 |---|---|---|
-| 🏗️ | **Abhishek** | Protocol Architecture & Solana Anchor Program |
-| 🔐 | **Pratik** | Encrypt FHE Integration & Policy Engine |
-| 🎨 | **Yash** | Frontend, Wallet Adapter & Demo |
+| 🏗️ | **Stellamaris** | Protocol Architecture, Solana Anchor Program & FHE |
+| 🎨 | **Jenny OLiver** | Frontend, Wallet Adapter & Demo |
 
 **Built for the Solana ecosystem and the Ika/Encrypt Frontier Hackathon** 🛡️
 

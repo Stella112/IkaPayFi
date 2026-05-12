@@ -4,9 +4,8 @@
 **IkaPayFi — Private Bridgeless PayFi Super App for Payroll & Remittances**
 
 ## Team
-- Abhishek
-- Pratik  
-- Yash (Nigeria)
+- Stellamaris
+- Jenny OLiver
 
 ## Track
 **Encrypt & Ika – Bridgeless Capital Markets and Encrypted Capital Markets**
