@@ -52,7 +52,7 @@ All balances, payment amounts, splits, and policy checks run as encrypted comput
 ---
 
 ## Deployed
-- Policy Engine: `IkaPayFi111111111111111111111111111111111`
+- Policy Engine: `54Rek86pHBP5V6GM4MieoMSup1ueVtuS56Tqz9SQXetb`
 - Encrypt Program: `4ebfzWdKnrnGseuQpezXdG8yCdHqwQ1SSBHD3bWArND8`
 - Devnet gRPC: `https://pre-alpha-dev-1.encrypt.ika-network.net:443`
 
@@ -62,8 +62,10 @@ All balances, payment amounts, splits, and policy checks run as encrypted comput
 1. Register passkey → vault bound to WebAuthn credential
 2. Create devnet wallet → keypair linked to Encrypt PDAs
 3. Set allocation policy (savings/family/bills percentages)
-4. Submit inflow (ETH/BTC/USDC amount)
-5. Watch encrypted split execute → Ika approval fires → audit log updates
+4. Use **Batch Payroll** to add multiple recipients (Name, Address, Amount)
+5. Submit Batch → Watch FHE encryption overlay as ciphertexts are generated
+6. Watch encrypted split execute for each recipient → Ika approval fires
+7. Audit log and Payrolls dashboard update with individual approval cards
 
 ## Run Commands
 ```bash
@@ -84,5 +86,6 @@ npm run reset # reset vault state
 - **Core Integration**: Ika is fundamental to every single action in IkaPayFi
 - **Innovation**: First private bridgeless PayFi with encrypted agentic payroll on Solana
 - **Real-world Impact**: Solves massive pain for millions of freelancers and remote workers
-- **Polished UX**: WebAuthn passkeys, dark-mode glassmorphism UI, zero-dependency stack
+- **Batch Payroll**: Enables DAOs and teams to pay multiple recipients in a single encrypted run
+- **Polished UX**: WebAuthn passkeys, dark/light mode toggle, dynamic FHE encryption overlays, animated counters, and zero-dependency stack
 - **Completeness**: Working MVP with automated tests, devnet wiring, and full documentation

@@ -38,4 +38,4 @@ encrypt-anchor = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha", op
 # ika-dwallet-anchor = { git = "https://github.com/dwallet-labs/ika-pre-alpha", optional = true }
 
 [dev-dependencies]
-encrypt-solana-test = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha", optional = true }
+encrypt-solana-test = { git = "https://github.com/dwallet-labs/encrypt-pre-alpha" }
